@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>User List</title>
+</head>
+<body>
+    <h1>Users</h1>
+    <ul id="userList">
+        <!-- User list will be populated by JavaScript -->
+    </ul>
+
+    <script>
+        fetch('/users')
+            .then(response => response.json())
+            .then(users => {
+                const userList = document.getElementById('userList');
+                users.forEach(user => {
+                    const li = document.createElement('li');
+                    li.textContent = user.nimi;
+                    userList.appendChild(li);
+                });
+            });
+    </script>
+</body>
+</html>
