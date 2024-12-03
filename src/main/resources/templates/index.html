@@ -1,25 +1,50 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 <head>
-    <title>User List</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event CRUD</title>
 </head>
 <body>
-    <h1>Users</h1>
-    <ul id="userList">
-        <!-- User list will be populated by JavaScript -->
-    </ul>
 
-    <script>
-        fetch('/users')
-            .then(response => response.json())
-            .then(users => {
-                const userList = document.getElementById('userList');
-                users.forEach(user => {
-                    const li = document.createElement('li');
-                    li.textContent = user.nimi;
-                    userList.appendChild(li);
-                });
-            });
-    </script>
+<!-- Create Event Form -->
+<form action="/events/create" method="post">
+    <label for="eventTitle">Event Title:</label>
+    <input type="text" id="eventTitle" name="eventTitle" required>
+    
+    <!-- Add other fields as needed -->
+
+    <button type="submit">Create Event</button>
+</form>
+
+<!-- Read All Events -->
+<h2>All Events</h2>
+<table border="1">
+    <thead>
+        <tr>
+            <th>Event Title</th>
+            <th>Event Description</th>
+            <th>Event Date</th>
+            <th>Category</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- Display all events here -->
+        <!-- Replace [EVENT_TITLE], [EVENT_DESCRIPTION], [EVENT_DATE], and [EVENT_TIME] with actual values -->
+        <tr>
+            <td>[EVENT_TITLE]</td>
+            <td>[EVENT_DESCRIPTION]</td>
+            <td>[EVENT_DATE]</td>
+            <td>[EVENT_CATEGORY]</td>
+            <td>
+                <button type="button">Edit</button>
+                <button type="button">Delete</button>
+            </td>
+        </tr>
+        <!-- Add more rows for additional events -->
+    </tbody>
+</table>
+
 </body>
 </html>
