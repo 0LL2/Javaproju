@@ -15,6 +15,12 @@ public class Category {
     @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Event> events;
 
+    public Category() {}
+
+    public Category(String name) {
+        this.name = name;
+    }
+
     public Long getId() {
         return id;
     }

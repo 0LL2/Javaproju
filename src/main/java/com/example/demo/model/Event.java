@@ -18,7 +18,6 @@ public class Event {
     @JoinColumn(name = "category_id", nullable = true)
     private Category category;
 
-    // Getters and setters
     public Long getId() {
         return id;
     }

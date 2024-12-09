@@ -13,15 +13,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 @Controller
 @RequestMapping("/events")
 public class EventController {
-    private static final Logger logger = LoggerFactory.getLogger(EventController.class);
-
-
     @Autowired
     private EventService eventService;
 
@@ -41,13 +35,8 @@ public class EventController {
     public String showEventForm(Model model) {
         
         List<Category> categories = categoryRepository.findAll();
-        List<Category> categories2 = categoryRepository.findByNameContainingIgnoreCase("Work");
-
-
-        logger.info("Fetched categories: " + categories + " + " + categories2);
 
         model.addAttribute("categories", categories);
-
         model.addAttribute("event", new Event());
         return "event-form";
     }
@@ -57,8 +46,6 @@ public class EventController {
         if (categoryId != null) {
             Category category = categoryService.getCategoryById(categoryId);
             event.setCategory(category);
-        } else {
-            event.setCategory(null);
         }
         eventService.saveEvent(event);
         return "redirect:/events";
@@ -72,14 +59,8 @@ public class EventController {
     }
 
     @PutMapping("/{id}")
-    public String updateEvent(@PathVariable Long id, @ModelAttribute Event event, @RequestParam(value = "categoryId", required = false) Long categoryId) {
+    public String updateEvent(@PathVariable Long id, @ModelAttribute Event event) {
         event.setId(id);
-        if (categoryId != null) {
-            Category category = categoryService.getCategoryById(categoryId);
-            event.setCategory(category);
-        } else {
-            event.setCategory(null);
-        }
         eventService.saveEvent(event);
         return "redirect:/events";
     }
