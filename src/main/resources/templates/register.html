@@ -5,13 +5,11 @@
 </head>
 <body>
     <h1>Register</h1>
-    <form th:action="@{/register}" th:object="${user}" method="post">
+    <form th:action="@{/user/register}" th:object="${user}" method="post">
         <label>Username:</label>
         <input type="text" th:field="*{username}" /><br/>
         <label>Password:</label>
         <input type="password" th:field="*{password}" /><br/>
-        <label>Role:</label>
-        <input type="text" th:field="*{role}" /><br/>
         <button type="submit">Register</button>
     </form>
 </body>
