@@ -2,6 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Category Form</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
 </head>
 <body>
     <h1 th:text="${category.id == null} ? 'Add Category' : 'Edit Category'">Category Form</h1>

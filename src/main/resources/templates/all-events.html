@@ -2,26 +2,27 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>All Events</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
 </head>
 <body>
-    <h1>All Events</h1>
-    <table>
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Description</th>
-                <th>Date and Time</th>
-                <th>Category</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr th:each="event : ${events}">
-                <td th:text="${event.name}">Event Name</td>
-                <td th:text="${event.description}">Event Description</td>
-                <td th:text="${event.dateTime}">Event DateTime</td>
-                <td th:text="${event.category.name}">Event Category</td>
-            </tr>
-        </tbody>
-    </table>
+    <!-- Header Section -->
+    <div class="header">
+        <a href="/">Home</a>
+        <a href="/event-form">Create Event</a>
+        <a href="/all-events">All Events</a>
+        <a href="/calendar">Calendar</a>
+        <a href="/login">Login</a>
+        <a href="/register">Register</a>
+    </div>
+
+    <div class="table-container">
+        <h1>All Events</h1>
+        <div th:each="event : ${events}" class="event-card">
+            <h2 th:text="${event.name}">Event Name</h2>
+            <p th:text="${event.dateTime}">Event DateTime</p>
+            <p th:text="${event.description}">Event Description</p>
+            <p class="category" th:text="${event.category != null ? event.category.name : 'No Category'}">Event Category</p>
+        </div>
+    </div>
 </body>
 </html>

@@ -1,34 +1,32 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Event CRUD</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
 </head>
 <body>
 
-<h1>Event CRUD Application</h1>
+    <!-- Header Section -->
+    <div class="header">
+        <a href="/">Home</a>
+        <a href="/event-form">Create Event</a>
+        <a href="/all-events">All Events</a>
+        <a href="/calendar">Calendar</a>
+        <a href="/login">Login</a>
+        <a href="/register">Register</a>
+    </div>
 
-<!-- Link to Create Event Form -->
-<a href="/event-form">Create Event</a>
+    <!-- Main Content -->
+    <h1>Event CRUD Application</h1>
 
-<!-- Link to All Events -->
-<a href="/all-events">View All Events</a>
-
-<!-- Link to Create Category Form -->
-<a href="/category-form">Create Category</a>
-
-<!-- Link to Category Events -->
-<a href="/category-events">View Category Events</a>
-
-<!-- Link to Calendar -->
-<a href="/calendar">View Calendar</a>
-
-<!-- Link to Login -->
-<a href="/login">Login</a>
-
-<!-- Link to Register -->
-<a href="/register">Register</a>
+    <!-- Links Section -->
+    <div class="button-container">
+        <a href="/event-form">Create Event</a>
+        <a href="/all-events">View All Events</a>
+        <a href="/calendar">View Calendar</a>
+    </div>
 
 </body>
 </html>

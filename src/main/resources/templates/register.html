@@ -2,8 +2,19 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Register</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
 </head>
 <body>
+    <!-- Header Section -->
+    <div class="header">
+        <a href="/">Home</a>
+        <a href="/event-form">Create Event</a>
+        <a href="/all-events">All Events</a>
+        <a href="/calendar">Calendar</a>
+        <a href="/login">Login</a>
+        <a href="/register">Register</a>
+    </div>
+
     <h1>Register</h1>
     <form th:action="@{/user/register}" th:object="${user}" method="post">
         <label>Username:</label>

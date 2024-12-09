@@ -2,8 +2,18 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Event Form</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
 </head>
 <body>
+    <!-- Header Section -->
+    <div class="header">
+        <a href="/">Home</a>
+        <a href="/event-form">Create Event</a>
+        <a href="/all-events">All Events</a>
+        <a href="/calendar">Calendar</a>
+        <a href="/login">Login</a>
+        <a href="/register">Register</a>
+    </div>
     <h1 th:text="${event.id == null} ? 'Add Event' : 'Edit Event'">Event Form</h1>
     <form th:action="@{/events}" th:object="${event}" method="post">
         <input type="hidden" th:field="*{id}" />
@@ -13,10 +23,15 @@
         <input type="text" th:field="*{description}" /><br/>
         <label>Date and Time:</label>
         <input type="datetime-local" th:field="*{dateTime}" /><br/>
-        <label>Category:</label>
-        <select th:field="*{category}" th:object="${event}">
-            <option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.name}"></option>
-        </select>        
+        <label for="category">Category</label>
+        <select th:field="*{category}">
+            <option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.name}">Select Category</option>
+        </select><br/>
+
+        <div th:if="${event.category == 'new'}">
+            <label for="newCategory">New Category Name:</label>
+            <input type="text" id="newCategory" name="newCategory" /><br/>
+        </div>
         <button type="submit">Save</button>
     </form>
 </body>
