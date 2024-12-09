@@ -1,41 +1,92 @@
 package com.example.demo.controller;
 
+import com.example.demo.model.Category;
 import com.example.demo.model.Event;
+import com.example.demo.service.CategoryService;
 import com.example.demo.service.EventService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import com.example.demo.repository.CategoryRepository;
 
 import java.util.List;
 
-@RestController
-@RequestMapping("/api/events")
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+@Controller
+@RequestMapping("/events")
 public class EventController {
+    private static final Logger logger = LoggerFactory.getLogger(EventController.class);
+
+
     @Autowired
     private EventService eventService;
 
+    @Autowired
+    private CategoryService categoryService;
+
+    @Autowired
+    private CategoryRepository categoryRepository;
+
     @GetMapping
-    public List<Event> getAllEvents() {
-        return eventService.getAllEvents();
+    public String getAllEvents(Model model) {
+        model.addAttribute("events", eventService.getAllEvents());
+        return "all-events";
     }
 
-    @GetMapping("/{id}")
-    public Event getEventById(@PathVariable Long id) {
-        return eventService.getEventById(id);
+    @GetMapping("/event-form")
+    public String showEventForm(Model model) {
+        
+        List<Category> categories = categoryRepository.findAll();
+        List<Category> categories2 = categoryRepository.findByNameContainingIgnoreCase("Work");
+
+
+        logger.info("Fetched categories: " + categories + " + " + categories2);
+
+        model.addAttribute("categories", categories);
+
+        model.addAttribute("event", new Event());
+        return "event-form";
     }
 
     @PostMapping
-    public Event createEvent(@RequestBody Event event) {
-        return eventService.saveEvent(event);
+    public String createEvent(@ModelAttribute Event event, @RequestParam(value = "categoryId", required = false) Long categoryId) {
+        if (categoryId != null) {
+            Category category = categoryService.getCategoryById(categoryId);
+            event.setCategory(category);
+        } else {
+            event.setCategory(null);
+        }
+        eventService.saveEvent(event);
+        return "redirect:/events";
+    }
+
+    @GetMapping("/{id}")
+    public String getEventById(@PathVariable Long id, Model model) {
+        Event event = eventService.getEventById(id);
+        model.addAttribute("event", event);
+        return "event-details";
     }
 
     @PutMapping("/{id}")
-    public Event updateEvent(@PathVariable Long id, @RequestBody Event event) {
+    public String updateEvent(@PathVariable Long id, @ModelAttribute Event event, @RequestParam(value = "categoryId", required = false) Long categoryId) {
         event.setId(id);
-        return eventService.saveEvent(event);
+        if (categoryId != null) {
+            Category category = categoryService.getCategoryById(categoryId);
+            event.setCategory(category);
+        } else {
+            event.setCategory(null);
+        }
+        eventService.saveEvent(event);
+        return "redirect:/events";
     }
 
     @DeleteMapping("/{id}")
-    public void deleteEvent(@PathVariable Long id) {
+    public String deleteEvent(@PathVariable Long id) {
         eventService.deleteEvent(id);
+        return "redirect:/events";
     }
 }

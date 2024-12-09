@@ -15,7 +15,7 @@ public class Event {
     private LocalDateTime dateTime;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "category_id")
+    @JoinColumn(name = "category_id", nullable = true)
     private Category category;
 
     // Getters and setters
@@ -57,5 +57,18 @@ public class Event {
 
     public void setCategory(Category category) {
         this.category = category;
+    }
+
+    public Long getCategoryId() {
+        return category != null ? category.getId() : null;
+    }
+
+    public void setCategoryId(Long categoryId) {
+        if (categoryId == null) {
+            this.category = null;
+        } else {
+            this.category = new Category();
+            this.category.setId(categoryId);
+        }
     }
 }
