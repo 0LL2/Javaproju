@@ -8,9 +8,9 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 @SpringBootApplication
 @EnableJpaRepositories(basePackages = "com.example.demo.repository")
 @EntityScan(basePackages = "com.example.demo.model")
-public class DemoApplication {
+public class App {
 
     public static void main(String[] args) {
-        SpringApplication.run(DemoApplication.class, args);
+        SpringApplication.run(App.class, args);
     }
 }

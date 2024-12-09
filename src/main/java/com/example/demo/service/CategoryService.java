@@ -16,7 +16,6 @@ public class CategoryService {
 
     public List<Category> getAllCategories() {
         List<Category> categories = categoryRepository.findAll();
-        System.out.println("Fetched Categories: " + categories); // Add logging for debugging
         return categories;
     }
 
