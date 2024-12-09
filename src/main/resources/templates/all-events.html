@@ -5,10 +5,23 @@
 </head>
 <body>
     <h1>All Events</h1>
-    <ul>
-        <li th:each="event : ${events}">
-            <span th:text="${event.name}">Event Name</span>
-        </li>
-    </ul>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Date and Time</th>
+                <th>Category</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="event : ${events}">
+                <td th:text="${event.name}">Event Name</td>
+                <td th:text="${event.description}">Event Description</td>
+                <td th:text="${event.dateTime}">Event DateTime</td>
+                <td th:text="${event.category.name}">Event Category</td>
+            </tr>
+        </tbody>
+    </table>
 </body>
 </html>

@@ -14,7 +14,7 @@
         <label>Date and Time:</label>
         <input type="datetime-local" th:field="*{dateTime}" /><br/>
         <label>Category:</label>
-        <select th:field="*{categoryId}">
+        <select th:field="*{category.id}">
             <option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.name}"></option>
         </select><br/>
         <button type="submit">Save</button>
